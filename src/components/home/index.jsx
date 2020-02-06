@@ -18,40 +18,39 @@ import {
     TitleContainer
 } from '../../utils/styledComponent'
 let Home = (props) => {
-    const [data, setData] = useState({});
-    const [loading, setLoading] = useState(false);
+    const [data, setData] = useState({
+        loading: false
+    });
+
     const init = async () => {
-        setLoading(true);
-        let result = await fetchData(props.url);
-        setData(analysisAttributes(result))
-        setLoading(false);
-    }
+        setData({
+            ...data,
+            loading: true
+        });
 
-    const random = async () => {
-        setLoading(true);
-        let data = await fetchData(randomPick(URLS));
-        setData(analysisAttributes(randomPick(data.results)));
-        setLoading(false);
+        let data = await fetchData((props.url ? props.url : randomPick(URLS)));
+console.log(props.url)
+        setData({
+            ...data,
+            ...analysisAttributes((props.url ? data : randomPick(data.results))),
+        })
     }
-
 
     useEffect(() => {
-        if (props.url){
-            init()
-        } else {
-            random();
-        }
+        init()
     }, [props.url]);
 
     const fetchSingle = () => {
+      
         return (
             <HeaderContainer>
                 <Row>
                     {
+                        
                         data.single && data.single.map(attr => {
                             if (attr == `name` || attr == `title`){
                                 return <Col sm={12} md={12} lg={12}>
-                                    <TitleContainer>{data.values[attr]}</TitleContainer>
+                                    <TitleContainer test-id="star-war-home-title">{data.values[attr]}</TitleContainer>
                                 </Col>
                             } else {
                                 return <Col sm={12} md={12} lg={12}>
@@ -94,16 +93,13 @@ let Home = (props) => {
         })
     }
 
-
     return (
         <>
-        
             <Container>
-                {!loading && fetchSingle()}
-                {!loading && fetchList()}
-
+                {!data.loading && fetchSingle()}
+                {!data.loading && fetchList()}
                 {
-                    loading && <HomePageLoadingContainer>
+                    data.loading && <HomePageLoadingContainer>
                     <Spinner animation="border" variant="light" />
                 </HomePageLoadingContainer>
                 }
@@ -119,7 +115,6 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = dipatch => {
-    return {
-    }
+    return {}
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

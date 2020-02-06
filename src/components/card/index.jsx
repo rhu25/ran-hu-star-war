@@ -35,6 +35,7 @@ let StarWarCard = (props) => {
             <Row>
                 {
                     data.single && data.single.map(attr => {
+                        /* istanbul ignore else */
                         if (attr !== `name` && attr !== `title`){
                             return <Col sm={12} md={12} lg={12}> 
                                 <StarWarCardContainer>
@@ -50,11 +51,10 @@ let StarWarCard = (props) => {
     }
 
     return (
-        <a style={{ cursor: 'pointer' }} onClick={() => props.setEndPoint({url: props.url}) }>
+        <a test-id="star-war-card-link" style={{ cursor: 'pointer' }} onClick={() => props.setEndPoint({url: props.url}) }>
             <Card style={{ backgroundColor: 'rgba(0, 0, 0, 0.6)',  margin: `0.5em` }} >
      
-                <StarWarCardHeader>{(data.values && (data.values.name || data.values.title) || `Error`)} </StarWarCardHeader>
-                             
+                <StarWarCardHeader>{(data.values && (data.values.name || data.values.title))} </StarWarCardHeader>        
                 <Card.Body>
                     {
                         loading && <LoadingContainer>
@@ -68,8 +68,6 @@ let StarWarCard = (props) => {
                             </Card.Text>
                         )
                     }
-                    
-            
                 </Card.Body>
             </Card>
         </a>
@@ -83,9 +81,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = dipatch => {
     return {
-        setEndPoint : (data) => {
-            return dipatch(setEndPoint(data))
-        }
+        setEndPoint : (data) => dipatch(setEndPoint(data))
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(StarWarCard);

@@ -3,7 +3,7 @@ export const randomPick = (list) => list[Math.floor(Math.random() * list.length)
 
 export const fetchData = async (url) => {
     let result = await fetch(url);
-    
+   
     if (result.status == 200){
         return result.json();
     }
