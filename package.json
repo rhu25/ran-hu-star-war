@@ -1,0 +1,67 @@
+{
+  "name": "movie",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "bootstrap": "^4.4.1",
+    "postcss-loader": "^3.0.0",
+    "react": "^16.10.2",
+    "react-bootstrap": "^1.0.0-beta.16",
+    "react-dom": "^16.10.2",
+    "react-scripts": "3.2.0",
+    "sass-loader": "^8.0.2",
+    "styled-components": "^5.0.1"
+  },
+  "scripts": {
+    "start": "webpack-dev-server",
+    "test": "jest --coverage"
+  },
+  "jest": {
+    "setupFiles": [
+      "<rootDir>/test/mock.js"
+    ]
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@babel/core": "^7.6.4",
+    "@babel/plugin-transform-runtime": "^7.6.2",
+    "@babel/preset-env": "^7.6.3",
+    "@babel/preset-react": "^7.6.3",
+    "babel-jest": "^24.9.0",
+    "babel-loader": "^8.0.6",
+    "css-loader": "^3.2.0",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.15.1",
+    "history": "^4.10.1",
+    "html-webpack-plugin": "^3.2.0",
+    "jest": "^24.9.0",
+    "jest-fetch-mock": "^2.1.2",
+    "less": "^3.10.3",
+    "less-loader": "^5.0.0",
+    "react-redux": "^7.1.1",
+    "react-router": "^5.1.2",
+    "react-router-dom": "^5.1.2",
+    "react-test-renderer": "^16.10.2",
+    "redux": "^4.0.4",
+    "redux-mock-store": "^1.5.3",
+    "source-map-loader": "^0.2.4",
+    "style-loader": "^1.0.0",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.9",
+    "webpack-dev-server": "^3.8.2"
+  }
+}
