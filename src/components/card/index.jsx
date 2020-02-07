@@ -11,17 +11,21 @@ import {
   StarWarCardContent,
   StarWarCardTitle,
   StarWarCardContainer,
-  LoadingContainer
+  LoadingContainer,
+  ErrorWrapper
 } from "../../utils/styledComponent";
 let StarWarCard = props => {
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
 
   /**
    * init component
    */
   const init = async () => {
-    let result = await fetchData(props.url).catch(e => setLoading(false));
+    let result = await fetchData(props.url).catch(e => {
+      setError(true)
+    });
 
     setData(analysisAttributes(result));
     setLoading(false);
@@ -63,19 +67,21 @@ let StarWarCard = props => {
     <a
       test-id="star-war-card-link"
       style={{ cursor: "pointer" }}
-      onClick={() => props.setEndPoint({ url: props.url })}
+      onClick={() => !error && props.setEndPoint({ url: props.url })}
     >
-      <Card style={{ backgroundColor: "rgba(0, 0, 0, 0.6)", margin: `0.5em` }}>
+      <Card style={{ backgroundColor: "rgba(0, 0, 0, 0.6)", margin: `5px 0`}}>
         <StarWarCardHeader>
-          {data.values && (data.values.name || data.values.title)}{" "}
+          {!error && data.values && (data.values.name || data.values.title)}
+          {error && `Loading Error`}
         </StarWarCardHeader>
         <Card.Body>
-          {loading && (
+          {!error && loading && (
             <LoadingContainer>
               <Spinner animation="border" variant="light" />
             </LoadingContainer>
           )}
-          {!loading && <Card.Text>{renderData()}</Card.Text>}
+          {!error && !loading && <Card.Text>{renderData()}</Card.Text>}
+          {error && <ErrorWrapper src={`${window.location.origin.toString()}/public/error.jpg`}></ErrorWrapper>}
         </Card.Body>
       </Card>
     </a>

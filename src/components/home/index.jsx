@@ -9,13 +9,13 @@ import { URLS } from "../../utils/enum";
 import StarWarCard from "../card/index.jsx";
 import Spinner from "react-bootstrap/Spinner";
 import {
-  StarWarCardContainer,
-  StarWarCardTitle,
-  StarWarCardContent,
   HomePageLoadingContainer,
   CategoryContainer,
   HeaderContainer,
-  TitleContainer
+  TitleContainer,
+  HeaderTitle,
+  HeaderContent,
+  HeaderWrapper
 } from "../../utils/styledComponent";
 let Home = props => {
   const [data, setData] = useState({
@@ -63,12 +63,7 @@ let Home = props => {
               } else {
                 return (
                   <Col sm={12} md={12} lg={12}>
-                    <StarWarCardContainer>
-                      <StarWarCardTitle>{attr}</StarWarCardTitle> :{" "}
-                      <StarWarCardContent>
-                        {data.values[attr]}
-                      </StarWarCardContent>
-                    </StarWarCardContainer>
+                    <HeaderWrapper><HeaderTitle>{attr}:</HeaderTitle> <HeaderContent>{data.values[attr]}</HeaderContent></HeaderWrapper>
                   </Col>
                 );
               }
@@ -87,15 +82,15 @@ let Home = props => {
       data.list.map(attr => {
         return (
           <Row>
-            {data.values && data.values[attr] && data.values[attr].length && (
+            {data.values && data.values[attr] && data.values[attr].length > 0 && (
               <Col sm={12} md={12} lg={12}>
-                <CategoryContainer>{attr}</CategoryContainer>
+                <CategoryContainer>{attr.toUpperCase()}</CategoryContainer>
               </Col>
             )}
             {data.values &&
               data.values[attr] &&
-              data.values[attr].length &&
-              data.values[attr].map(url => {
+              data.values[attr].length > 0 &&
+              data.values[attr].map((url) => {
                 return (
                   <Col sm={4} md={3} lg={3}>
                     <StarWarCard url={url} />
