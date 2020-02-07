@@ -63,7 +63,10 @@ let Home = props => {
               } else {
                 return (
                   <Col sm={12} md={12} lg={12}>
-                    <HeaderWrapper><HeaderTitle>{attr}:</HeaderTitle> <HeaderContent>{data.values[attr]}</HeaderContent></HeaderWrapper>
+                    <HeaderWrapper>
+                      <HeaderTitle>{attr}:</HeaderTitle>{" "}
+                      <HeaderContent>{data.values[attr]}</HeaderContent>
+                    </HeaderWrapper>
                   </Col>
                 );
               }
@@ -90,7 +93,7 @@ let Home = props => {
             {data.values &&
               data.values[attr] &&
               data.values[attr].length > 0 &&
-              data.values[attr].map((url) => {
+              data.values[attr].map(url => {
                 return (
                   <Col sm={4} md={3} lg={3}>
                     <StarWarCard url={url} />

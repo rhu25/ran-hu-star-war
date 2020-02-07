@@ -70,11 +70,11 @@ export const HeaderTitle = styled.div`
   font-family: Comic Sans MS;
 `;
 export const HeaderContent = styled.div`
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    color: #fff;
-    font-family: Comic Sans MS;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #fff;
+  font-family: Comic Sans MS;
 `;
 export const HeaderWrapper = styled.div`
   display: flex;
